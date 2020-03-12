@@ -6,7 +6,7 @@ metadata:
     capabilities: Seamless Upgrades
     categories: Integration & Delivery
     certified: "false"
-    containerImage: quay.io/kiegroup/kie-cloud-operator:1.4.0
+    containerImage: quay.io/myeung/kie-cloud-operator:1.4.0
     createdAt: "2020-02-26 17:27:54"
     description: Deploys and manages Red Hat Process Automation Manager and Red Hat
       Decision Manager environments.
@@ -186,13 +186,19 @@ spec:
                   value: registry.redhat.io/amq7/amq-broker:7.5
                 - name: OAUTH_PROXY_IMAGE
                   value: registry.redhat.io/openshift3/oauth-proxy:v3.11
-                image: quay.io/kiegroup/kie-cloud-operator:1.4.0
+                image: quay.io/myeung/kie-cloud-operator:1.4.0
                 imagePullPolicy: Always
                 name: kie-cloud-operator
                 resources: {}
               serviceAccountName: kie-cloud-operator
       permissions:
       - rules:
+        - apiGroups:
+          - console.openshift.io
+          resources:
+          - consoleyamlsamples
+          verbs:
+          - '*'
         - apiGroups:
           - ""
           - apps
@@ -263,7 +269,7 @@ spec:
   provider:
     name: Red Hat
   relatedImages:
-  - image: quay.io/kiegroup/kie-cloud-operator:1.4.0
+  - image: quay.io/myeung/kie-cloud-operator:1.4.0
     name: kie-cloud-operator
   - image: registry.redhat.io/rhdm-7/rhdm-kieserver-rhel8:7.7.0
     name: rhdm-kieserver-rhel8

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/RHsyseng/operator-utils/pkg/logs"
+	"github.com/kiegroup/kie-cloud-operator/pkg/controller/kieapp/webconsole"
 	"reflect"
 	"regexp"
 	"strings"
@@ -59,11 +60,11 @@ func (reconciler *Reconciler) Reconcile(request reconcile.Request) (reconcile.Re
 			if shouldDeployConsole() {
 				deployConsole(reconciler, myDep)
 			}
+			webconsole.CreateSampleYAMLs()
 		} else {
 			log.Error("Can't properly create ConfigMaps. ", err)
 		}
 	}
-
 	// Fetch the KieApp instance
 	instance := &api.KieApp{}
 	err := reconciler.Service.Get(context.TODO(), request.NamespacedName, instance)
